@@ -38,3 +38,19 @@ def get_list(s):
     return list(map(int, s.split()))
 
 
+def get_dict_words(func):
+
+    def wrapper(*args):
+        return dict(func(*args))
+
+    return wrapper
+
+
+
+@get_dict_words
+def get_list_words(s1, s2):
+    return zip(s1.split(), s2.split())
+
+
+
+
