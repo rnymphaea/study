@@ -38,4 +38,3 @@ def get_list(s):
     return list(map(int, s.split()))
 
 
-print(*lst)
