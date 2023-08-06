@@ -52,5 +52,31 @@ def get_list_words(s1, s2):
     return zip(s1.split(), s2.split())
 
 
+def del_useless_dashes(func):
+    def wrapper(*args):
+        s = func(*args)
+        while s.count('--'):
+            s = s.replace('--', '-')
+        return s
+
+    return wrapper
+
+
+@del_useless_dashes
+def get_string_latinic(s):
+    s = s.lower()
+    t = {'ё': 'yo', 'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ж': 'zh',
+         'з': 'z', 'и': 'i', 'й': 'y', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o', 'п': 'p',
+         'р': 'r', 'с': 's', 'т': 't', 'у': 'u', 'ф': 'f', 'х': 'h', 'ц': 'c', 'ч': 'ch', 'ш': 'sh',
+         'щ': 'shch', 'ъ': '', 'ы': 'y', 'ь': '', 'э': 'e', 'ю': 'yu', 'я': 'ya'}
+    res = ''
+    for i in s:
+        if i in t:
+            res += t[i]
+        elif i in '<>?,. ][{}"':
+            res += '-'
+        else:
+            res += i
+    return res
 
 
