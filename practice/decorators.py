@@ -12,9 +12,6 @@ def get_menu(s):
     return s.split()
 
 
-get_menu('Главная Добавить Удалить Выйти')
-
-
 def show_text(func):
 
     def wrapper(*args):
@@ -28,4 +25,17 @@ def get_sq(width, height):
     return width * height
 
 
-get_sq(20, 30)
+def sort_list(func):
+
+    def wrapper(*args):
+        return sorted(func(*args))
+
+    return wrapper
+
+
+@sort_list
+def get_list(s):
+    return list(map(int, s.split()))
+
+
+print(*lst)
