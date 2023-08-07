@@ -1,3 +1,6 @@
+from functools import wraps
+
+
 def show_menu(func):
 
     def inner(s):
@@ -132,5 +135,18 @@ def to_latinic(s):
         else:
             res += char
     return res
+
+
+def outer(func):
+    @wraps(func)
+    def inner(*args):
+        return sum(func(*args))
+    return inner
+
+
+@outer
+def get_list2(s):
+    '''Функция для формирования списка целых значений'''
+    return list(map(int, s.split()))
 
 
