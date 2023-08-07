@@ -46,7 +46,6 @@ def get_dict_words(func):
     return wrapper
 
 
-
 @get_dict_words
 def get_list_words(s1, s2):
     return zip(s1.split(), s2.split())
@@ -78,5 +77,31 @@ def get_string_latinic(s):
         else:
             res += i
     return res
+
+# передача аргументов декораторам
+def outer_decorator(start):
+    def decorator(func):
+        def inner(*args):
+            return sum(func(*args)) + start
+        return inner
+    return decorator
+
+
+@outer_decorator(start=5)
+def get_list_nums(s):
+    return list(map(int, s.split()))
+
+
+def outer_tag(tag='h1'):
+    def decorator(func):
+        def inner(*args, **kwargs):
+            return f"<{tag}>{func(*args, **kwargs)}</{tag}>"
+        return inner
+    return decorator
+
+
+@outer_tag(tag='div')
+def to_lower(s):
+    return s.lower()
 
 
