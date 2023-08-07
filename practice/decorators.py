@@ -105,3 +105,34 @@ def to_lower(s):
     return s.lower()
 
 
+def outer_chars(chars="!?"):
+    def decorator(func):
+        def inner(*args, **kwargs):
+            res = func(*args, **kwargs)
+            for char in chars:
+                res = res.replace(char, '-')
+            while res.count('--'):
+                res = res.replace('--', '-')
+            return res
+        return inner
+    return decorator
+
+
+@outer_chars(chars='?!:;,. ')
+def to_latinic(s):
+    t = {'ё': 'yo', 'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ж': 'zh',
+         'з': 'z', 'и': 'i', 'й': 'y', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o', 'п': 'p',
+         'р': 'r', 'с': 's', 'т': 't', 'у': 'u', 'ф': 'f', 'х': 'h', 'ц': 'c', 'ч': 'ch', 'ш': 'sh',
+         'щ': 'shch', 'ъ': '', 'ы': 'y', 'ь': '', 'э': 'e', 'ю': 'yu', 'я': 'ya'}
+    s = s.lower()
+    res = ""
+    for char in s:
+        if char in t:
+            res += t[char]
+        else:
+            res += char
+    return res
+
+
+s = input()
+print(to_latinic(s))
