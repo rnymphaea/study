@@ -134,5 +134,3 @@ def to_latinic(s):
     return res
 
 
-s = input()
-print(to_latinic(s))
